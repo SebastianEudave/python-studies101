@@ -1,8 +1,18 @@
 class Solution:
     '''
-    Problem:
+    Problem: https://leetcode.com/problems/contains-duplicate/
     '''
-
+    def containsDuplicate(self, nums: list[int]) -> bool:
+        numsSet = set()
+        '''
+        The "in" keyword has 2 uses in python
+        1. To iterate over a collection in a for loop
+        2. To check if a value is present in a collection
+        '''
+        for currentNum in nums:
+            if currentNum in numsSet: return True
+            numsSet.add(currentNum)
+        return False
 
     '''
     Problem: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
@@ -43,3 +53,4 @@ class Solution:
 resolution = Solution()
 print(resolution.maxProfit([7,1,5,3,6,4]))
 print(resolution.twoSum([4,2,6,9,2], 11))
+print(resolution.containsDuplicate([1,2,35,1,7]))
