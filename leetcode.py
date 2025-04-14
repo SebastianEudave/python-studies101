@@ -1,5 +1,35 @@
 class Solution:
     '''
+    Problem: https://leetcode.com/problems/valid-anagram/
+    '''
+    def isAnagram(self, s: str, t: str) -> bool:
+        if(len(s) != len(t)): return False
+        '''
+        Use a dictionary to store the letters that already appeared at the string
+        and their frequency, then we can update the map to see if the letters are present on the map and decrease their count.
+        Other solutions include arrays to increase/decrease appearance of each letter, ex. JAVA: alphabet[s.charAt(i) - 'a']++
+        '''
+        characterAppearance = {}
+        for letter in s:
+            apparencesInDict = characterAppearance.get(letter)
+            if(apparencesInDict is None):
+                characterAppearance[letter] = 1
+            else:
+                characterAppearance[letter] = apparencesInDict + 1
+        for letter in t:
+            apparencesInDict = characterAppearance.get(letter)
+            if(apparencesInDict is None):
+                return False
+            elif apparencesInDict == 1:
+                characterAppearance.pop(letter)
+            else:
+                characterAppearance[letter] = apparencesInDict - 1
+
+        if len(characterAppearance) == 0: 
+            return True
+        return False
+
+    '''
     Problem: https://leetcode.com/problems/contains-duplicate/
     '''
     def containsDuplicate(self, nums: list[int]) -> bool:
@@ -54,3 +84,4 @@ resolution = Solution()
 print(resolution.maxProfit([7,1,5,3,6,4]))
 print(resolution.twoSum([4,2,6,9,2], 11))
 print(resolution.containsDuplicate([1,2,35,1,7]))
+print(resolution.isAnagram(s = "car", t = "rat"))
