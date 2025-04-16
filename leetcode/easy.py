@@ -1,5 +1,30 @@
 class Solution:
     '''
+    Problem: https://leetcode.com/problems/valid-parentheses/
+    '''
+    def isValid(self, s: str) -> bool:
+        bracketsDict = {
+            '{':'}', 
+            '[': ']',
+            '(': ')'
+            }
+        
+        strStack = []
+
+        '''
+        In keyword can be used directly in dictionaries to know if a key is present.
+        If the character is opening a bracket then we add it to the stack, 
+        if not we need to check if it is actually closing the previous bracket
+        '''
+        for c in s:
+            if c in bracketsDict: strStack.append(c)
+            elif len(strStack) == 0 or bracketsDict[strStack.pop()] != c: 
+                return False
+
+        if len(strStack) != 0: return False
+        return True
+
+    '''
     Problem: https://leetcode.com/problems/valid-anagram/
     '''
     def isAnagram(self, s: str, t: str) -> bool:
@@ -85,3 +110,4 @@ print(resolution.maxProfit([7,1,5,3,6,4]))
 print(resolution.twoSum([4,2,6,9,2], 11))
 print(resolution.containsDuplicate([1,2,35,1,7]))
 print(resolution.isAnagram(s = "car", t = "rat"))
+print(resolution.isValid("[]{()}"))
