@@ -1,4 +1,59 @@
+'''
+Problem: https://leetcode.com/problems/implement-queue-using-stacks/
+'''
+class MyQueue:
+
+    def __init__(self):
+        self.stack1 = []
+        self.isEmpty = True
+
+    def push(self, x: int) -> None:
+        '''
+        To implement a queue using two stacks we need to focus on add operation,
+        popping all elements in our correctly ordered stack and adding them to a second one will let us
+        add the new value at the end of the queue, after that we pop from the second stack
+        to add it to the original stack.
+        Remember Stack implements LIFO while a Queue implements FIFO.
+        '''
+        stack2 = []
+        if self.isEmpty:
+            self.stack1.append(x)
+            self.isEmpty = False
+        else:
+            lenStack = len(self.stack1)
+            while lenStack > 0:
+                lenStack -= 1
+                stack2.append(self.stack1.pop())
+            stack2.append(x)
+            lenStack = len(stack2)
+            while lenStack > 0:
+                lenStack -= 1
+                self.stack1.append(stack2.pop())
+        
+
+    def pop(self) -> int:
+        if self.isEmpty: return None
+        if len(self.stack1) == 1: self.isEmpty = True
+        return self.stack1.pop()
+
+    def peek(self) -> int:
+        if self.isEmpty: return None
+        x = self.stack1.pop()
+        self.stack1.append(x)
+        return x
+
+    def empty(self) -> bool:
+        return self.isEmpty
+        
+    # Your MyQueue object will be instantiated and called as such:
+    # obj = MyQueue()
+    # obj.push(x)
+    # param_2 = obj.pop()
+    # param_3 = obj.peek()
+    # param_4 = obj.empty()
+
 class Solution:
+
     '''
     Problem: https://leetcode.com/problems/valid-parentheses/
     '''
