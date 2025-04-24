@@ -1,6 +1,32 @@
 class Solution:
 
     '''
+    Problem: https://leetcode.com/problems/valid-palindrome/description/
+    '''
+    def isPalindrome(self, s: str) -> bool:
+        '''
+        With filter function we can remove al chars that are not alphanumeric
+        filter(function to test each element, list to iterate through)
+        '''
+        newS = ''.join(filter(str.isalnum, s))
+        newS = newS.lower()
+
+        if len(newS) == 0: return True
+
+        right = len(newS) - 1
+        mid = (int) (right / 2)
+
+        '''
+        Using python capabuilities we can use newS == newS[::-1] to make this comparisson
+        '''
+        for left in range(0, mid + 1):
+            if(newS[left] != newS[right]): return False
+            right -= 1
+
+        return True
+
+
+    '''
     Problem: https://leetcode.com/problems/valid-parentheses/
     '''
     def isValid(self, s: str) -> bool:
@@ -112,3 +138,4 @@ print(resolution.twoSum([4,2,6,9,2], 11))
 print(resolution.containsDuplicate([1,2,35,1,7]))
 print(resolution.isAnagram(s = "car", t = "rat"))
 print(resolution.isValid("[]{()}"))
+print(resolution.isPalindrome("A man, a plan, a canal: Panama"))
