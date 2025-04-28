@@ -1,4 +1,32 @@
+from easy_classes import ListNode
+from typing import Optional
+
 class Solution:
+    '''
+    Problem: https://leetcode.com/problems/merge-two-sorted-lists/
+    '''
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        root = ListNode()
+        current = root
+
+        '''
+        iterating until we get to the end of any list and then just adding the remaining to the list
+        '''
+        while list1 and list2:
+            if list1.val < list2.val:
+                current.next = ListNode(list1.val)
+                list1 = list1.next
+            else:
+                current.next = ListNode(list2.val)
+                list2 = list2.next
+            current = current.next
+
+        ''''
+        Var value can be set using or for not None values
+        '''
+        current.next = list1 or list2
+        return root.next
+                
 
     '''
     Problem: https://leetcode.com/problems/valid-palindrome/description/
