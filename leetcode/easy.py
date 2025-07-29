@@ -2,6 +2,43 @@ from easy_classes import ListNode
 from typing import Optional
 
 class Solution:
+
+    '''
+    Problem: https://leetcode.com/problems/linked-list-cycle
+    '''
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        visitedNodes = set()
+        while head is not None:
+            if head in visitedNodes:
+                return True
+            visitedNodes.add(head)
+            head = head.next
+        return False
+
+
+    '''
+    Problem: https://leetcode.com/problems/reverse-linked-list
+    '''
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None:
+            return head
+
+        resultList = []
+        while head is not None:
+            resultList.append(head.val)
+            head = head.next
+
+        head = ListNode(resultList.pop())
+        copyHead = head
+        while len(resultList) > 0:
+            value = resultList.pop()
+            copyHead.next = ListNode(value)
+            copyHead = copyHead.next
+
+        return head
+            
+        
+
     '''
     Problem: https://leetcode.com/problems/merge-two-sorted-lists/
     '''
@@ -167,3 +204,8 @@ print(resolution.containsDuplicate([1,2,35,1,7]))
 print(resolution.isAnagram(s = "car", t = "rat"))
 print(resolution.isValid("[]{()}"))
 print(resolution.isPalindrome("A man, a plan, a canal: Panama"))
+
+setTest = set()
+setTest.add(ListNode(2))
+setTest.add(ListNode(2))
+print(setTest)

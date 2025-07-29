@@ -6,6 +6,13 @@ class ListNode:
         self.val = val
         self.next = next
 
+    # Used to manage same values as same objects ins ets and dict
+    # def __eq__(self, other):
+    #     return other.val == self.val
+    
+    # def __hash__(self):
+    #     return hash((self.val, self.next))
+
 '''
 Problem: https://leetcode.com/problems/min-stack/
 '''
